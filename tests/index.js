@@ -1,4 +1,6 @@
 const assert = require("assert");
-const myModule = require("..");
-assert.strictEqual(myModule.add(1, 2), 3);
-console.log("ok");
+
+require("..").then(wasm => {
+  console.log(wasm.exports.modelFactory("input"));
+  assert.strictEqual(wasm.exports.setProperty1("hello"), "hello");
+});
