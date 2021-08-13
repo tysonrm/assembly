@@ -1,6 +1,6 @@
 // The entry file of your WebAssembly module.
 
-export function modelFactory(inputString: string[]): string[] {
+export function makeModel(inputString: string[]): string[] {
   return inputString;
 }
 

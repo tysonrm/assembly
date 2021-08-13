@@ -49,9 +49,9 @@
  (export "__collect" (func $~lib/rt/itcms/__collect))
  (export "__rtti_base" (global $~lib/rt/__rtti_base))
  (export "memory" (memory $0))
- (export "modelFactory" (func $export:assembly/index/modelFactory))
+ (export "makeModel" (func $export:assembly/index/makeModel))
  (start $~start)
- (func $assembly/index/modelFactory (param $0 i32) (result i32)
+ (func $assembly/index/makeModel (param $0 i32) (result i32)
   local.get $0
  )
  (func $assembly/index/getModelName (result i32)
@@ -2618,7 +2618,7 @@
    unreachable
   end
  )
- (func $export:assembly/index/modelFactory (param $0 i32) (result i32)
+ (func $export:assembly/index/makeModel (param $0 i32) (result i32)
   (local $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
@@ -2629,7 +2629,7 @@
   local.get $0
   i32.store
   local.get $0
-  call $assembly/index/modelFactory
+  call $assembly/index/makeModel
   local.set $1
   global.get $~lib/memory/__stack_pointer
   i32.const 4
@@ -2637,5 +2637,5 @@
   global.set $~lib/memory/__stack_pointer
   local.get $1
  )
- ;; custom section "as-bind_bindings", size 419, contents: "{\"typeIds\":{\"~lib/array/Array<~lib/string/String>\":{\"id\":3,\"byteSize\":16},\"~lib/string/String\":{\"id\":1,\"byteSize\":0}},\"importedFunctions\":{},\"exportedFunctions\":{\"modelFactory\":{\"returnType\":\"~lib/array/Array<~lib/string/String>\",\"parameters\":[\"~lib/array/Array<~lib/string/String>\"]},\"getModelName\":{\"returnType\":\"~lib/string/String\",\"parameters\":[]},\"getEndpoint\":{\"returnType\":\"~lib/string/String\",\"parameters\":[]}}}"
+ ;; custom section "as-bind_bindings", size 416, contents: "{\"typeIds\":{\"~lib/array/Array<~lib/string/String>\":{\"id\":3,\"byteSize\":16},\"~lib/string/String\":{\"id\":1,\"byteSize\":0}},\"importedFunctions\":{},\"exportedFunctions\":{\"makeModel\":{\"returnType\":\"~lib/array/Array<~lib/string/String>\",\"parameters\":[\"~lib/array/Array<~lib/string/String>\"]},\"getModelName\":{\"returnType\":\"~lib/string/String\",\"parameters\":[]},\"getEndpoint\":{\"returnType\":\"~lib/string/String\",\"parameters\":[]}}}"
 )
