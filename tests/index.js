@@ -1,7 +1,8 @@
 const assert = require("assert");
 
-require("..").then(wasmInstance => {
-  console.log(wasmInstance.exports.modelFactory("input"));
-  assert.strictEqual(wasmInstance.exports.setProperty1("hello"), "hello");
-  assert.strictEqual(wasmInstance.exports.add(1, 2), 3);
+require("..").then(wasmModule => {
+  console.log("makeModel args:", wasmModule.exports.modelFactory(["args"]));
+  assert.strictEqual(wasmModule.exports.getModelName(), "wasmmodel");
+  assert.strictEqual(wasmModule.exports.getEndpoint(), "wasmmodels");
+  console.log("modleName:", wasmModule.exports.getModelName());
 });

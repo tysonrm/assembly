@@ -2,50 +2,50 @@
 # yarn lockfile v1
 
 
-"@assemblyscript/loader@^0.19.10":
-  version "0.19.10"
-  resolved "https://registry.npmjs.org/@assemblyscript/loader/-/loader-0.19.10.tgz"
-  integrity sha512-YPWDWrEl9lsHIMfY2w968kEthfSq5SVEypBoPT/NcbNeefLZoHjRVQTepmqi9ZaQijekk/3NTiFKafJqGh/OXA==
+"@assemblyscript/loader@^0.19.10", "@assemblyscript/loader@0.19.x":
+  "integrity" "sha512-YPWDWrEl9lsHIMfY2w968kEthfSq5SVEypBoPT/NcbNeefLZoHjRVQTepmqi9ZaQijekk/3NTiFKafJqGh/OXA=="
+  "resolved" "https://registry.npmjs.org/@assemblyscript/loader/-/loader-0.19.10.tgz"
+  "version" "0.19.10"
 
-as-bind@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.npmjs.org/as-bind/-/as-bind-0.8.0.tgz"
-  integrity sha512-TGQ0/9LtAFmSMzafSTupLjcw3OuzmHsKg9KEI52MZsj9MzjPP59JzglsznHFQI+cMqnvxC7SivedZ/7wZChkew==
+"as-bind@^0.8.0":
+  "integrity" "sha512-TGQ0/9LtAFmSMzafSTupLjcw3OuzmHsKg9KEI52MZsj9MzjPP59JzglsznHFQI+cMqnvxC7SivedZ/7wZChkew=="
+  "resolved" "https://registry.npmjs.org/as-bind/-/as-bind-0.8.0.tgz"
+  "version" "0.8.0"
   dependencies:
-    visitor-as "^0.5.0"
+    "visitor-as" "^0.5.0"
 
-assemblyscript@^0.19.10:
-  version "0.19.10"
-  resolved "https://registry.npmjs.org/assemblyscript/-/assemblyscript-0.19.10.tgz"
-  integrity sha512-HavcUBXB3mBTRGJcpvaQjmnmaqKHBGREjSPNsIvnAk2f9dj78y4BkMaSSdvBQYWcDDzsHQjyUC8stICFkD1Odg==
+"assemblyscript@^0.19.10", "assemblyscript@0.19.x":
+  "integrity" "sha512-HavcUBXB3mBTRGJcpvaQjmnmaqKHBGREjSPNsIvnAk2f9dj78y4BkMaSSdvBQYWcDDzsHQjyUC8stICFkD1Odg=="
+  "resolved" "https://registry.npmjs.org/assemblyscript/-/assemblyscript-0.19.10.tgz"
+  "version" "0.19.10"
   dependencies:
-    binaryen "101.0.0-nightly.20210723"
-    long "^4.0.0"
+    "binaryen" "101.0.0-nightly.20210723"
+    "long" "^4.0.0"
 
-binaryen@101.0.0-nightly.20210723:
-  version "101.0.0-nightly.20210723"
-  resolved "https://registry.npmjs.org/binaryen/-/binaryen-101.0.0-nightly.20210723.tgz"
-  integrity sha512-eioJNqhHlkguVSbblHOtLqlhtC882SOEPKmNFZaDuz1hzQjolxZ+eu3/kaS10n3sGPONsIZsO7R9fR00UyhEUA==
+"binaryen@101.0.0-nightly.20210723":
+  "integrity" "sha512-eioJNqhHlkguVSbblHOtLqlhtC882SOEPKmNFZaDuz1hzQjolxZ+eu3/kaS10n3sGPONsIZsO7R9fR00UyhEUA=="
+  "resolved" "https://registry.npmjs.org/binaryen/-/binaryen-101.0.0-nightly.20210723.tgz"
+  "version" "101.0.0-nightly.20210723"
 
-lodash.clonedeep@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
-  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+"lodash.clonedeep@^4.5.0":
+  "integrity" "sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8="
+  "resolved" "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  "version" "4.5.0"
 
-long@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/long/-/long-4.0.0.tgz"
-  integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
+"long@^4.0.0":
+  "integrity" "sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA=="
+  "resolved" "https://registry.npmjs.org/long/-/long-4.0.0.tgz"
+  "version" "4.0.0"
 
-ts-mixer@^5.1.0:
-  version "5.4.1"
-  resolved "https://registry.npmjs.org/ts-mixer/-/ts-mixer-5.4.1.tgz"
-  integrity sha512-Zo9HgPCtNouDgJ+LGtrzVOjSg8+7WGQktIKLwAfaNrlOK1mWGlz1ejsAF/YqUEqAGjUTeB5fEg8gH9Aui6w9xA==
+"ts-mixer@^5.1.0":
+  "integrity" "sha512-Zo9HgPCtNouDgJ+LGtrzVOjSg8+7WGQktIKLwAfaNrlOK1mWGlz1ejsAF/YqUEqAGjUTeB5fEg8gH9Aui6w9xA=="
+  "resolved" "https://registry.npmjs.org/ts-mixer/-/ts-mixer-5.4.1.tgz"
+  "version" "5.4.1"
 
-visitor-as@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/visitor-as/-/visitor-as-0.5.0.tgz"
-  integrity sha512-U2P13pa7BAnfj6IEbP4feS1Rci6NT4GlDcwpqkk90u7LGalc5jH9aMuWnxTC8RJJ92iZzDQ8Lea5/OnLDsgzlw==
+"visitor-as@^0.5.0":
+  "integrity" "sha512-U2P13pa7BAnfj6IEbP4feS1Rci6NT4GlDcwpqkk90u7LGalc5jH9aMuWnxTC8RJJ92iZzDQ8Lea5/OnLDsgzlw=="
+  "resolved" "https://registry.npmjs.org/visitor-as/-/visitor-as-0.5.0.tgz"
+  "version" "0.5.0"
   dependencies:
-    lodash.clonedeep "^4.5.0"
-    ts-mixer "^5.1.0"
+    "lodash.clonedeep" "^4.5.0"
+    "ts-mixer" "^5.1.0"
