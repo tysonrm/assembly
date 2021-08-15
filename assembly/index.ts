@@ -1,14 +1,14 @@
 // The entry file of your WebAssembly module.
 
-export function makeModel(): string[] {
-  return ['prop1','prop2'];
+export function makeModel(tuples: string[][]): string[][] {
+  return [['prop1','val1'],['prop2','val2']].concat(tuples);
 }
 
 export function getModelName (): string {
-  return "wasmmodel";
+  return "wasm-service";
 }
-export function getEndpoint (): string{
-   return "wasmmodels";
+export function getEndpoint (): string {
+   return "wasm-service";
 }
 
 
