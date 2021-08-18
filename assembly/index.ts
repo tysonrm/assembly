@@ -17,10 +17,14 @@ export function modelFactory (keys: string[], values: string[]): Model {
     return new Model("not val1", "wasm");
 }
 
+function dispose(model: Model): void {
+  model.dispose();
+}
+
 export class ModelSpec {
   modelName: string
   endpoint: string
-  constructor(name:string,endpoint:string) {
+  constructor(name:string, endpoint:string) {
     this.modelName = name;
     this.endpoint = endpoint;
   }
