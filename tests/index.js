@@ -11,7 +11,6 @@ require('..').then(wasmModule => {
     ModelSpec,
     Model,
     getModelSpec,
-    getModelName,
     getEndpoint,
     modelFactory,
   } = wasmModule.exports

@@ -18,12 +18,12 @@ export function modelFactory (keys: string[], values: string[]): Model {
 }
 
 export class ModelSpec {
+  modelName: string
+  endpoint: string
   constructor(name:string,endpoint:string) {
     this.modelName = name;
     this.endpoint = endpoint;
   }
-  modelName: string
-  endpoint: string
 }
 
 export function getModelSpec(): ModelSpec {
