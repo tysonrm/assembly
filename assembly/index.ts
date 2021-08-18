@@ -1,18 +1,20 @@
 
 export class Model {
+  modelName:string
   prop1:string
-  constructor(prop1:string) {
+  constructor(prop1:string, name:string) {
     this.prop1 = prop1;
+    this.modelName = name
   }
 }
 
 export const ArrayOfStrings_ID = idof<string[]>();
 
-export function modelFactory (keys: string[], values: string[] ): Model {
+export function modelFactory (keys: string[], values: string[]): Model {
   if (keys[0] == "key1" &&  values[0] === "val1")
-    return new Model("val1");
+    return new Model("val1", "wasm");
   else
-    return new Model("not val1");
+    return new Model("not val1", "wasm");
 }
 
 export class ModelSpec {
@@ -27,13 +29,5 @@ export class ModelSpec {
 export function getModelSpec(): ModelSpec {
   return new ModelSpec("wasm","wasm");
 } 
-
-export function getModelName (): string {
-  return "wasm-service";
-}
-
-export function getEndpoint (): string {
-   return "wasm-service";
-}
 
 
