@@ -36,10 +36,18 @@ require('..').then(wasmModule => {
       // The array keeps its values alive from now on
       //const model = Model.wrap(modelPtr);
 
-      const array = __getArray(modelPtr);
-      const decoded = array.map(a => __getArray(a)).map(b => ({ [__getString(b[0])]: __getString(b[1]) })).reduce((p, c) => ({ ...p, ...c }))
 
-      console.log(decoded);
+      const model = __getArray(modelPtr).map(multi => __getArray(multi)).map(tuple => ({
+        [__getString(tuple[0])]: __getString(tuple[1])
+      })).reduce((prop1, prop2) => ({
+        ...prop1,
+        ...prop2
+      }));
+
+      // const array = __getArray(modelPtr);
+      // const decoded = array.map(a => __getArray(a)).map(b => ({ [__getString(b[0])]: __getString(b[1]) })).reduce((p, c) => ({ ...p, ...c }))
+
+      console.log(model);
 
       // const hydrated = Object.entries(([k, v]) => ({ [__getString(k)]: __getString(v) }));
       // const hyd2 = Object.keys(model).map(k => __getString(model[k]));
