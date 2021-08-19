@@ -7,6 +7,7 @@ require('..').then(wasmModule => {
     __getString,
     __newString,
     __newArray,
+    __getArray,
     ArrayOfStrings_ID,
     ModelSpec,
     Model,
@@ -31,12 +32,22 @@ require('..').then(wasmModule => {
       // Provide our array of lowercase strings to WebAssembly, and obtain the new
       // array of uppercase strings before printing it.
       const modelPtr = __pin(modelFactory(keyPtr, valPtr))
+
       // The array keeps its values alive from now on
-      const model = Model.wrap(modelPtr);
-      console.log(__getString(model.prop1))
+      //const model = Model.wrap(modelPtr);
+
+      const array = __getArray(modelPtr);
+      const decoded = array.map(a => __getArray(a)).map(b => ({ [__getString(b[0])]: __getString(b[1]) })).reduce((p, c) => ({ ...p, ...c }))
+
+      console.log(decoded);
+
+      // const hydrated = Object.entries(([k, v]) => ({ [__getString(k)]: __getString(v) }));
+      // const hyd2 = Object.keys(model).map(k => __getString(model[k]));
+      // console.log("<<<<<<<", hyd2)
+      // console.log(">>>>>>>>>", hydrated)
       keyPtrs.forEach(__unpin);
       valPtrs.forEach(__unpin);
-      model.cleanup = () => __unpin(modelPtr)
+      //model.cleanup = () => __unpin(modelPtr)
     }
   }
   console.log(wrapped.endpoint)

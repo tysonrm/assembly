@@ -10,11 +10,13 @@ export class Model {
 
 export const ArrayOfStrings_ID = idof<string[]>();
 
-export function modelFactory (keys: string[], values: string[]): Model {
-  if (keys[0] == "key1" &&  values[0] === "val1")
-    return new Model("val1", "wasm");
-  else
-    return new Model("not val1", "wasm");
+export function modelFactory (keys: string[], values: string[]): string[][] {
+  const arr = new Array<string[]>(3);
+  const key1 = keys[0] === "key1" ? values[0] : "purple";
+  arr[0]=["key1",key1];
+  arr[1]=["key2","dinosaur"];
+  arr[2]=["key3","val3"];
+  return arr;
 }
 
 export class ModelSpec {
