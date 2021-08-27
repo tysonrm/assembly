@@ -23,4 +23,7 @@ export function modelFactory (keys: string[], values: string[]): string[][] {
   return arr;
 }
 
+export function factorial(i: i32): i32 {
+  return i == 0 ? 1 : i * factorial(i - 1);
+}
 
