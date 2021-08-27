@@ -3,8 +3,8 @@
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i32_=>_none (func (param i32)))
  (type $i32_i32_=>_none (func (param i32 i32)))
- (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $none_=>_none (func))
+ (type $i32_=>_i32 (func (param i32) (result i32)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_i32_=>_i32 (func (param i32 i32 i32) (result i32)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
@@ -64,7 +64,6 @@
  (export "ModelSpec" (global $assembly/index/ModelSpec))
  (export "getModelSpec" (func $assembly/index/getModelSpec))
  (export "ArrayOfStrings_ID" (global $assembly/index/ArrayOfStrings_ID))
- (export "factorial" (func $assembly/index/factorial))
  (export "__new" (func $~lib/rt/itcms/__new))
  (export "__pin" (func $~lib/rt/itcms/__pin))
  (export "__unpin" (func $~lib/rt/itcms/__unpin))
@@ -3059,19 +3058,6 @@
   local.get $1
   local.get $2
   call $~lib/array/Array<~lib/string/String>#__uset
- )
- (func $assembly/index/factorial (param $0 i32) (result i32)
-  local.get $0
-  if (result i32)
-   local.get $0
-   i32.const 1
-   i32.sub
-   call $assembly/index/factorial
-   local.get $0
-   i32.mul
-  else
-   i32.const 1
-  end
  )
  (func $~lib/rt/itcms/__pin (param $0 i32) (result i32)
   (local $1 i32)

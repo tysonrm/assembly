@@ -16,6 +16,7 @@ require('..').then(wasmModule => {
     modelFactory,
   } = wasmModule.exports
 
+  console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())
   const modelSpec = ModelSpec.wrap(specPtr)
   console.log(__getString(modelSpec.modelName));
