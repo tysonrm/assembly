@@ -1,24 +1,3 @@
-// export class Port {
-//   name: string;
-//   type: string;
-//   service: string;
-//   consumesEvent: string;
-//   producesEvent: string;
-//   constructor(
-//     name: string,
-//     type: string,
-//     service: string,
-//     consumesEvent: string,
-//     producesEvent: string
-//   ) {
-//     this.name = name;
-//     this.type = type;
-//     this.service = service;
-//     this.consumesEvent = consumesEvent;
-//     this.producesEvent = producesEvent;
-//   }
-// }
-
 export class ModelSpec {
   modelName: string;
   endpoint: string;
@@ -26,19 +5,10 @@ export class ModelSpec {
   constructor(name: string, endpoint: string) {
     this.modelName = name;
     this.endpoint = endpoint;
-    //this.ports = new Array<Port>(1);
-    //this.ports[0] = new Port(
-    //   "wasm",
-    //   "outbound",
-    //   "wasm-service",
-    //   "wasmStart",
-    //   "wasmFinish"
-    // );
   }
 }
 
 export const ArrayOfStrings_ID = idof<string[]>();
-// export const ArrayOfPorts_ID = idof<Port[]>();
 
 export function getModelSpec(): ModelSpec {
   return new ModelSpec("wasm", "wasm");
