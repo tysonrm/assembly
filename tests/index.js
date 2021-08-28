@@ -10,9 +10,7 @@ require('..').then(wasmModule => {
     __getArray,
     ArrayOfStrings_ID,
     ModelSpec,
-    Model,
     getModelSpec,
-    getEndpoint,
     modelFactory,
   } = wasmModule.exports
 
@@ -63,8 +61,8 @@ require('..').then(wasmModule => {
   console.log(wrapped.modelMame)
   console.log(wrapped.factory({ key1: "fromInput1", key2: "fromInput2" }));
 
-  assert.strictEqual(__getString(), 'wasm-service')
-  assert.strictEqual(__getString(getEndpoint()), 'wasm-service')
+  assert.strictEqual(wrapped.modelMame, 'wasm')
+  assert.strictEqual(wrapped.endpoint, 'wasm')
 
   __unpin(specPtr)
 
