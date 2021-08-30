@@ -21,12 +21,18 @@ exports.wrapWasmModelSpec = function (module) {
     modelName,
     endpoint,
     __getString
+    // __pin,
+    // getModelSpec,
+    // ModelSpec
   } = module.exports
+
+  const specPtr = __pin(getModelSpec())
+  const modelSpec = ModelSpec.wrap(specPtr)
 
   // wrapped model spec
   return Object.freeze({
-    modelName: __getString(modelName),
-    endpoint: __getString(endpoint),
+    modelName: __getString(modelSpec.modelName),
+    endpoint: __getString(modelSpec.endpoint),
     test: () => adapter.callWasmFunction(test, { key1: 'val1', c: 'd' }),
     /**
      * Pass any dependencies, return factory function that creates model

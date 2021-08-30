@@ -13,7 +13,8 @@ require('..').then(wasmModule => {
     ArrayOfStrings_ID,
     ModelSpec,
     getModelSpec,
-    modelFactory
+    modelFactory,
+    modelName
   } = wasmModule.exports
 
   adapter = interop.WasmInterop(wasmModule)
@@ -25,6 +26,11 @@ require('..').then(wasmModule => {
   assert.strictEqual(
     adapter.callWasmFunction(wasmModule.exports.commandEx, { a: 'b' }),
     { status: 'accepted' }
+  )
+
+  console.log(
+    '>>>>>>>>>>>>>>>>>>>>modelName',
+    __getString(wasmModule.exports.modelName)
   )
 
   //console.log(Object.entries(wasmModule.exports))
