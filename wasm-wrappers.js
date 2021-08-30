@@ -18,12 +18,12 @@ exports.wrapWasmModelSpec = function (module) {
   const {
     test,
     modelFactory,
-    modelName,
-    endpoint,
-    __getString
-    // __pin,
-    // getModelSpec,
-    // ModelSpec
+    // modelName,
+    // endpoint,
+    __getString,
+    __pin,
+    getModelSpec,
+    ModelSpec
   } = module.exports
 
   const specPtr = __pin(getModelSpec())
