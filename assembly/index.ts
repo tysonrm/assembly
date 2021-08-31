@@ -45,7 +45,7 @@ export function commandEx(keys:string[],values:string[]):string[][]{
   return output; 
 }
 
-function calculateFibonacci(x:f64):f64 {
+export function calculateFibonacci(x:f64):f64 {
   if (x === 0) {
     return 0
   }
@@ -58,9 +58,9 @@ function calculateFibonacci(x:f64):f64 {
 }
 
 export function fibonacci(keys:string[],values:string[]):string[][] {
-  const x = parseFloat(values[keys.findIndex(k => k === "fibonacci")])
+  //const x = parseFloat(values[keys.findIndex(k => k === "fibonacci")])
   const start = Date.now()
-  calculateFibonacci(x);
+  calculateFibonacci(100);
   const duration = Date.now() - start
   const output = new Array<string[]>(1);
   output[0] = ["duration", duration.toString()];
