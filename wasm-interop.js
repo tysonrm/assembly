@@ -107,7 +107,8 @@ exports.WasmInterop = function (module) {
           if (cmd) {
             return {
               [command]: {
-                command: input => callWasmFunction(cmd, input)
+                command: input => this.callWasmFunction(cmd, input),
+                acl: ['write']
               },
               description: commandNames[command] || 'wasm command'
             }
@@ -117,7 +118,7 @@ exports.WasmInterop = function (module) {
     },
 
     getWasmPorts () {
-      const ports = callWasmFunction(getPorts)
+      const ports = this.callWasmFunction(getPorts)
       return Object.keys(ports)
         .map(port => {
           if (ports[port]) {

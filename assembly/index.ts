@@ -33,15 +33,36 @@ export function test (keys: string[], values: string[]): string[][] {
 }
 
 export function getCommands():string[][] {
-  const commands = new Array<string[]>(1);
+  const commands = new Array<string[]>(2);
   commands[0] = ["commandEx","a sample command"];
+  commands[1] = ["fibonacci","run fibanocci sequence"]
   return commands;
 }
 
-export function commandEx(_input:string[][]):string[][]{
+export function commandEx(keys:string[],values:string[]):string[][]{
   const output = new Array<string[]>(1);
   output[0] = ["status","accepted"];
   return output; 
 }
 
+function calculateFibonacci(x:f64):f64 {
+  if (x === 0) {
+    return 0
+  }
 
+  if (x === 1) {
+    return 1
+  }
+
+  return calculateFibonacci(x - 1) + calculateFibonacci(x - 2)
+}
+
+export function fibonacci(keys:string[],values:string[]):string[][] {
+  const x = parseFloat(values[keys.findIndex(k => k === "fibonacci")])
+  const start = Date.now()
+  calculateFibonacci(x);
+  const duration = Date.now() - start
+  const output = new Array<string[]>(1);
+  output[0] = ["duration", duration.toString()];
+  return output;
+}
