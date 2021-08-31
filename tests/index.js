@@ -28,11 +28,6 @@ require('..').then(wasmModule => {
     { status: 'accepted' }
   )
 
-  console.log(
-    '>>>>>>>>>>>>>>>>>>>>modelName',
-    __getString(wasmModule.exports.modelName)
-  )
-
   //console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())
   const modelSpec = ModelSpec.wrap(specPtr)
