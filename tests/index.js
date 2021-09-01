@@ -35,10 +35,10 @@ require('..').then(wasmModule => {
   console.log(wms)
   console.log(wms.test({ key1: 'val1', a: 'b' }))
 
-  assert.strictEqual(
-    adapter.callWasmFunction(wasmModule.exports.commandEx, { a: 'b' }),
-    { status: 'accepted' }
-  )
+  // assert.strictEqual(
+  //   adapter.callWasmFunction(wasmModule.exports.commandEx, { a: 'b' }),
+  //   { status: 'accepted' }
+  // )
 
   //console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())

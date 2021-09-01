@@ -40,6 +40,7 @@ export function test (keys: string[], values: string[]): string[][] {
   arr[0]=["key1",key1];
   arr[1]=["key2",key2];
   arr[2]=["key3","alwaysThisValue"];
+  aegis.log("test called")
   return arr;
 }
   
@@ -47,24 +48,29 @@ export function getCommands():string[][] {
   const commands = new Array<string[]>(2);
   commands[0] = ["webSocketListen","write"];
   commands[1] = ["webSocketNotify","write"];
-  commands[2] = ["fibonacci","write"]
-  commands[3] = ["listenCallback","write"]
-  commands[4] = ["deployModule","write"]
-  commands[5] = ["commandEx", ]
+  commands[2] = ["webSocetCallback","write"]
+  commands[3] = ["fibonacci","write"]
+  commands[4] = ["listenCallback","write"]
+  commands[5] = ["deployModule","write"]
+  commands[6] = ["commandEx", "write"]
   return commands;
 }
 
-export function webSocketListen(keys:string[],values:string[]):string[][]{
-  const output = new Array<string[]>(1);
-  output[0] = ["status","accepted"];
-  //aegis.webSocketListen("wasmComm", "webSocketReceive");
+export function webSocketListen(keys:string[],values:string[]):void{
+  //aegis.webSocketListen("wasmWebListen", "webSocketCallback");
   aegis.log("wasm listening on websocket");
-  return output; 
 }
 
-export function webSocketRecieve(keys:string[],values:string[]):void{
-
+export function webSocketNotify(keys:string[],values:string[]):void{
+  //aegis.webSocketNotify("wasmWebNotify",values[0].toString());
+  aegis.log("wasm invoked websocket notify");
 }
+
+export function webSocketCallback(keys:string[],values:string[]):void{
+  aegis.log("websocket callbacked fired");
+}
+
+
 
 
 export function calcFibonacci(x:f64):f64 {
