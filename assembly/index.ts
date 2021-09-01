@@ -38,33 +38,29 @@ export function test (keys: string[], values: string[]): string[][] {
 }
   
 export function getCommands():string[][] {
-  const commands = new Array<string[]>(2);
-  commands[0] = ["webSocketListen","write"];
-  commands[1] = ["webSocketNotify","write"];
-  commands[2] = ["webSocetCallback","write"]
+  const commands = new Array<string[]>(6);
+  commands[0] = ["websocketListen","tell wasm module to begin listening"];
+  commands[1] = ["websocketNotify","tell wasm module to send broadcast"];
+  commands[2] = ["websocketCallback","an event to which wasm subscribed has fired"]
   commands[3] = ["fibonacci","write"]
-  commands[4] = ["listenCallback","write"]
-  commands[5] = ["deployModule","write"]
-  commands[6] = ["commandEx", "write"]
+  commands[4] = ["deployModule","write"]
+  commands[5] = ["commandEx", "write"]
   return commands;
 }
 
-export function webSocketListen(keys:string[],values:string[]):void{
+export function websocketListen(keys:string[],values:string[]):void{
   //aegis.webSocketListen("wasmWebListen", "webSocketCallback");
   aegis.log("wasm listening on websocket");
 }
 
-export function webSocketNotify(keys:string[],values:string[]):void{
+export function websocketNotify(keys:string[],values:string[]):void{
   //aegis.webSocketNotify("wasmWebNotify",values[0].toString());
   aegis.log("wasm invoked websocket notify");
 }
 
-export function webSocketCallback(keys:string[],values:string[]):void{
+export function websocketCallback(keys:string[],values:string[]):void{
   aegis.log("websocket callbacked fired");
 }
-
-
-
 
 export function calcFibonacci(x:f64):f64 {
   if (x === 0) {
@@ -80,12 +76,15 @@ export function calcFibonacci(x:f64):f64 {
 
 export function fibonacci(keys:string[],vals:string[]):string[][] {
   //const x = parseFloat(values[keys.findIndex(k => k === "fibonacci")])
+  aegis.websocketNotify('fibonacci', 'starting '+new Date(Date.now()).toUTCString());
   const start = Date.now()
   calcFibonacci(10)
   const duration = Date.now() - start
   const output = new Array<string[]>(1);
   output[0] = ["duration", duration.toString()];
-  //aegis.callMethod('notify', 'fibonacci duration '+duration.toString());
+  // aegis.invokeMethod('notify', 'fibonacci duration '+duration.toString());
+  // aegis.websocketNotify('fibonacci', output[0].join(":").toString());
+  aegis.log("fibanocci "+output[0].join(":").toString())
   return output;
 }
 

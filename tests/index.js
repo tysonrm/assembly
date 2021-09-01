@@ -34,10 +34,12 @@ require('..').then(wasmInstance => {
   console.log(wms)
   console.log(wms.test({ key1: 'val1', a: 'b' }))
 
-  assert.strictEqual(
+  assert.equal(
     adapter.callWasmFunction(wasmInstance.exports.commandEx, { a: 'b' }),
     { a: 'b' }
   )
+
+  adapter.callWasmFunction(wasmInstance.exports.fibonacci, { a: 'b', c: 'd' })
 
   //console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())
