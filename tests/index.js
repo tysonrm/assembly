@@ -1,9 +1,8 @@
 const assert = require('assert')
-const { allowedNodeEnvironmentFlags } = require('process')
-const interop = require('../wasm-interop')
+const WasmInterop = require('../wasm-interop').WasmInterop
 const wrapper = require('../wasm-wrappers')
 
-require('..').then(wasmModule => {
+require('..').then(wasmInstance => {
   const {
     __pin,
     __unpin,
@@ -20,7 +19,7 @@ require('..').then(wasmModule => {
     // getInput,
     // getOutput,
     // testClass
-  } = wasmModule.exports
+  } = wasmInstance.exports
 
   // const inPtr = __pin(getInput())
   // const InClass = Input.wrap(inPtr)
@@ -29,16 +28,16 @@ require('..').then(wasmModule => {
   // const outPtr = __pin(testClass(input))
   // const output = Output.wrap(outPtr)
 
-  adapter = interop.WasmInterop(wasmModule)
+  const adapter = WasmInterop(wasmInstance)
 
-  const wms = wrapper.wrapWasmModelSpec(wasmModule)
+  const wms = wrapper.wrapWasmModelSpec(wasmInstance)
   console.log(wms)
   console.log(wms.test({ key1: 'val1', a: 'b' }))
 
-  // assert.strictEqual(
-  //   adapter.callWasmFunction(wasmModule.exports.commandEx, { a: 'b' }),
-  //   { status: 'accepted' }
-  // )
+  assert.strictEqual(
+    adapter.callWasmFunction(wasmInstance.exports.commandEx, { a: 'b' }),
+    { a: 'b' }
+  )
 
   //console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())

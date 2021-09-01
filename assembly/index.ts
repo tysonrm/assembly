@@ -1,12 +1,5 @@
 
 import * as aegis from "./aegis"
-  // function callMethod(methodName:string, methodData:string):void
-  // function listen(eventName:string, callbackName:string):void;
-  // function notify(eventName:string, eventData:string):void;
-  // function webSocketListen(eventName:string, callbackName:string):void;
-  // function webSocketNotify(eventName:string, eventData:string):void
-  // function deployModule(moduleName:string, moduleLocation:string[]):void
-
 
 export class ModelSpec {
   modelName: string
@@ -102,9 +95,11 @@ export function getPorts (keys:string[],vals:string[]):string[][] {
   return ports;
 }
 
-export function commandEx (keys:string[],vals:string[]):void {
-  aegis.log("commandEx called")
-  return
+export function commandEx (keys:string[],vals:string[]):string[][] {
+  aegis.log("\ncommandEx called")
+  const outval = new Array<string[]>(1)
+  outval[0]=[keys[0].toString(),vals[0].toString()];
+  return outval;
 }
 
 export function portEx (keys:string[],vals:string[]):void {
