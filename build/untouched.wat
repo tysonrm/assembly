@@ -17,6 +17,7 @@
  (type $i32_i64_i32_i32_=>_none (func (param i32 i64 i32 i32)))
  (type $i32_i32_i32_i32_=>_i32 (func (param i32 i32 i32 i32) (result i32)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
+ (import "aegis" "log" (func $assembly/aegis/log (param i32)))
  (import "Date" "now" (func $~lib/bindings/Date/now (result f64)))
  (global $assembly/index/ArrayOfStrings_ID i32 (i32.const 3))
  (global $~lib/rt/itcms/white (mut i32) (i32.const 0))
@@ -33,10 +34,10 @@
  (global $~lib/ASC_SHRINK_LEVEL i32 (i32.const 0))
  (global $~lib/builtins/u32.MAX_VALUE i32 (i32.const -1))
  (global $assembly/index/ModelSpec i32 (i32.const 4))
- (global $~lib/rt/__rtti_base i32 (i32.const 3456))
- (global $~lib/memory/__data_end i32 (i32.const 3516))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 19900))
- (global $~lib/memory/__heap_base i32 (i32.const 19900))
+ (global $~lib/rt/__rtti_base i32 (i32.const 3856))
+ (global $~lib/memory/__data_end i32 (i32.const 3916))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 20300))
+ (global $~lib/memory/__heap_base i32 (i32.const 20300))
  (memory $0 1)
  (data (i32.const 12) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00 \00\00\00~\00l\00i\00b\00/\00r\00t\00/\00i\00t\00c\00m\00s\00.\00t\00s\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (data (i32.const 80) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
@@ -57,28 +58,37 @@
  (data (i32.const 812) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1e\00\00\00a\00l\00w\00a\00y\00s\00T\00h\00i\00s\00V\00a\00l\00u\00e\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (data (i32.const 876) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00 \03\00\00@\03\00\00\00\00\00\00")
  (data (i32.const 908) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00 \03\00\00@\03\00\00\00\00\00\00")
- (data (i32.const 940) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\12\00\00\00c\00o\00m\00m\00a\00n\00d\00E\00x\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 988) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00 \00\00\00a\00 \00s\00a\00m\00p\00l\00e\00 \00c\00o\00m\00m\00a\00n\00d\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1052) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\c0\03\00\00\f0\03\00\00\00\00\00\00")
- (data (i32.const 1084) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\12\00\00\00f\00i\00b\00o\00n\00a\00c\00c\00i\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1132) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00,\00\00\00r\00u\00n\00 \00f\00i\00b\00a\00n\00o\00c\00c\00i\00 \00s\00e\00q\00u\00e\00n\00c\00e\00")
- (data (i32.const 1196) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00P\04\00\00\80\04\00\00\00\00\00\00")
- (data (i32.const 1228) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\0c\00\00\00s\00t\00a\00t\00u\00s\00")
- (data (i32.const 1260) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\10\00\00\00a\00c\00c\00e\00p\00t\00e\00d\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1308) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\e0\04\00\00\00\05\00\00\00\00\00\00")
- (data (i32.const 1340) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\10\00\00\00d\00u\00r\00a\00t\00i\00o\00n\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1388) "|\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00d\00\00\00t\00o\00S\00t\00r\00i\00n\00g\00(\00)\00 \00r\00a\00d\00i\00x\00 \00a\00r\00g\00u\00m\00e\00n\00t\00 \00m\00u\00s\00t\00 \00b\00e\00 \00b\00e\00t\00w\00e\00e\00n\00 \002\00 \00a\00n\00d\00 \003\006\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1516) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00u\00t\00i\00l\00/\00n\00u\00m\00b\00e\00r\00.\00t\00s\00\00\00\00\00\00\00")
- (data (i32.const 1580) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\02\00\00\000\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 1612) "0\000\000\001\000\002\000\003\000\004\000\005\000\006\000\007\000\008\000\009\001\000\001\001\001\002\001\003\001\004\001\005\001\006\001\007\001\008\001\009\002\000\002\001\002\002\002\003\002\004\002\005\002\006\002\007\002\008\002\009\003\000\003\001\003\002\003\003\003\004\003\005\003\006\003\007\003\008\003\009\004\000\004\001\004\002\004\003\004\004\004\005\004\006\004\007\004\008\004\009\005\000\005\001\005\002\005\003\005\004\005\005\005\006\005\007\005\008\005\009\006\000\006\001\006\002\006\003\006\004\006\005\006\006\006\007\006\008\006\009\007\000\007\001\007\002\007\003\007\004\007\005\007\006\007\007\007\008\007\009\008\000\008\001\008\002\008\003\008\004\008\005\008\006\008\007\008\008\008\009\009\000\009\001\009\002\009\003\009\004\009\005\009\006\009\007\009\008\009\009\00")
- (data (i32.const 2012) "\1c\04\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\04\00\000\000\000\001\000\002\000\003\000\004\000\005\000\006\000\007\000\008\000\009\000\00a\000\00b\000\00c\000\00d\000\00e\000\00f\001\000\001\001\001\002\001\003\001\004\001\005\001\006\001\007\001\008\001\009\001\00a\001\00b\001\00c\001\00d\001\00e\001\00f\002\000\002\001\002\002\002\003\002\004\002\005\002\006\002\007\002\008\002\009\002\00a\002\00b\002\00c\002\00d\002\00e\002\00f\003\000\003\001\003\002\003\003\003\004\003\005\003\006\003\007\003\008\003\009\003\00a\003\00b\003\00c\003\00d\003\00e\003\00f\004\000\004\001\004\002\004\003\004\004\004\005\004\006\004\007\004\008\004\009\004\00a\004\00b\004\00c\004\00d\004\00e\004\00f\005\000\005\001\005\002\005\003\005\004\005\005\005\006\005\007\005\008\005\009\005\00a\005\00b\005\00c\005\00d\005\00e\005\00f\006\000\006\001\006\002\006\003\006\004\006\005\006\006\006\007\006\008\006\009\006\00a\006\00b\006\00c\006\00d\006\00e\006\00f\007\000\007\001\007\002\007\003\007\004\007\005\007\006\007\007\007\008\007\009\007\00a\007\00b\007\00c\007\00d\007\00e\007\00f\008\000\008\001\008\002\008\003\008\004\008\005\008\006\008\007\008\008\008\009\008\00a\008\00b\008\00c\008\00d\008\00e\008\00f\009\000\009\001\009\002\009\003\009\004\009\005\009\006\009\007\009\008\009\009\009\00a\009\00b\009\00c\009\00d\009\00e\009\00f\00a\000\00a\001\00a\002\00a\003\00a\004\00a\005\00a\006\00a\007\00a\008\00a\009\00a\00a\00a\00b\00a\00c\00a\00d\00a\00e\00a\00f\00b\000\00b\001\00b\002\00b\003\00b\004\00b\005\00b\006\00b\007\00b\008\00b\009\00b\00a\00b\00b\00b\00c\00b\00d\00b\00e\00b\00f\00c\000\00c\001\00c\002\00c\003\00c\004\00c\005\00c\006\00c\007\00c\008\00c\009\00c\00a\00c\00b\00c\00c\00c\00d\00c\00e\00c\00f\00d\000\00d\001\00d\002\00d\003\00d\004\00d\005\00d\006\00d\007\00d\008\00d\009\00d\00a\00d\00b\00d\00c\00d\00d\00d\00e\00d\00f\00e\000\00e\001\00e\002\00e\003\00e\004\00e\005\00e\006\00e\007\00e\008\00e\009\00e\00a\00e\00b\00e\00c\00e\00d\00e\00e\00e\00f\00f\000\00f\001\00f\002\00f\003\00f\004\00f\005\00f\006\00f\007\00f\008\00f\009\00f\00a\00f\00b\00f\00c\00f\00d\00f\00e\00f\00f\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 3068) "\\\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00H\00\00\000\001\002\003\004\005\006\007\008\009\00a\00b\00c\00d\00e\00f\00g\00h\00i\00j\00k\00l\00m\00n\00o\00p\00q\00r\00s\00t\00u\00v\00w\00x\00y\00z\00\00\00\00\00")
- (data (i32.const 3164) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\0e\00\00\00p\00u\00b\00l\00i\00s\00h\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 3212) "L\00\00\00\00\00\00\00\00\00\00\00\01\00\00\006\00\00\00s\00e\00r\00v\00i\00c\00e\00,\00a\00d\00a\00p\00t\00e\00r\00,\00p\00o\00r\00t\00E\00x\00,\00t\00y\00p\00e\00\00\00\00\00\00\00")
- (data (i32.const 3292) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00p\0c\00\00\a0\0c\00\00\00\00\00\00")
- (data (i32.const 3324) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
- (data (i32.const 3388) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
- (data (i32.const 3456) "\07\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02A\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00")
+ (data (i32.const 940) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1e\00\00\00w\00e\00b\00S\00o\00c\00k\00e\00t\00L\00i\00s\00t\00e\00n\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1004) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\n\00\00\00w\00r\00i\00t\00e\00\00\00")
+ (data (i32.const 1036) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\c0\03\00\00\00\04\00\00\00\00\00\00")
+ (data (i32.const 1068) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1e\00\00\00w\00e\00b\00S\00o\00c\00k\00e\00t\00N\00o\00t\00i\00f\00y\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1132) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00@\04\00\00\00\04\00\00\00\00\00\00")
+ (data (i32.const 1164) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\12\00\00\00f\00i\00b\00o\00n\00a\00c\00c\00i\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1212) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\a0\04\00\00\00\04\00\00\00\00\00\00")
+ (data (i32.const 1244) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1c\00\00\00l\00i\00s\00t\00e\00n\00C\00a\00l\00l\00b\00a\00c\00k\00")
+ (data (i32.const 1292) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\f0\04\00\00\00\04\00\00\00\00\00\00")
+ (data (i32.const 1324) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\18\00\00\00d\00e\00p\00l\00o\00y\00M\00o\00d\00u\00l\00e\00\00\00\00\00")
+ (data (i32.const 1372) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00@\05\00\00\00\04\00\00\00\00\00\00")
+ (data (i32.const 1404) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\12\00\00\00c\00o\00m\00m\00a\00n\00d\00E\00x\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1452) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\04\00\00\00\90\05\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1484) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\0c\00\00\00s\00t\00a\00t\00u\00s\00")
+ (data (i32.const 1516) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\10\00\00\00a\00c\00c\00e\00p\00t\00e\00d\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1564) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\e0\05\00\00\00\06\00\00\00\00\00\00")
+ (data (i32.const 1596) "L\00\00\00\00\00\00\00\00\00\00\00\01\00\00\006\00\00\00w\00a\00s\00m\00 \00l\00i\00s\00t\00e\00n\00i\00n\00g\00 \00o\00n\00 \00w\00e\00b\00s\00o\00c\00k\00e\00t\00\00\00\00\00\00\00")
+ (data (i32.const 1676) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\10\00\00\00d\00u\00r\00a\00t\00i\00o\00n\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1724) "|\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00d\00\00\00t\00o\00S\00t\00r\00i\00n\00g\00(\00)\00 \00r\00a\00d\00i\00x\00 \00a\00r\00g\00u\00m\00e\00n\00t\00 \00m\00u\00s\00t\00 \00b\00e\00 \00b\00e\00t\00w\00e\00e\00n\00 \002\00 \00a\00n\00d\00 \003\006\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1852) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00&\00\00\00~\00l\00i\00b\00/\00u\00t\00i\00l\00/\00n\00u\00m\00b\00e\00r\00.\00t\00s\00\00\00\00\00\00\00")
+ (data (i32.const 1916) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\02\00\00\000\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 1948) "0\000\000\001\000\002\000\003\000\004\000\005\000\006\000\007\000\008\000\009\001\000\001\001\001\002\001\003\001\004\001\005\001\006\001\007\001\008\001\009\002\000\002\001\002\002\002\003\002\004\002\005\002\006\002\007\002\008\002\009\003\000\003\001\003\002\003\003\003\004\003\005\003\006\003\007\003\008\003\009\004\000\004\001\004\002\004\003\004\004\004\005\004\006\004\007\004\008\004\009\005\000\005\001\005\002\005\003\005\004\005\005\005\006\005\007\005\008\005\009\006\000\006\001\006\002\006\003\006\004\006\005\006\006\006\007\006\008\006\009\007\000\007\001\007\002\007\003\007\004\007\005\007\006\007\007\007\008\007\009\008\000\008\001\008\002\008\003\008\004\008\005\008\006\008\007\008\008\008\009\009\000\009\001\009\002\009\003\009\004\009\005\009\006\009\007\009\008\009\009\00")
+ (data (i32.const 2348) "\1c\04\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\04\00\000\000\000\001\000\002\000\003\000\004\000\005\000\006\000\007\000\008\000\009\000\00a\000\00b\000\00c\000\00d\000\00e\000\00f\001\000\001\001\001\002\001\003\001\004\001\005\001\006\001\007\001\008\001\009\001\00a\001\00b\001\00c\001\00d\001\00e\001\00f\002\000\002\001\002\002\002\003\002\004\002\005\002\006\002\007\002\008\002\009\002\00a\002\00b\002\00c\002\00d\002\00e\002\00f\003\000\003\001\003\002\003\003\003\004\003\005\003\006\003\007\003\008\003\009\003\00a\003\00b\003\00c\003\00d\003\00e\003\00f\004\000\004\001\004\002\004\003\004\004\004\005\004\006\004\007\004\008\004\009\004\00a\004\00b\004\00c\004\00d\004\00e\004\00f\005\000\005\001\005\002\005\003\005\004\005\005\005\006\005\007\005\008\005\009\005\00a\005\00b\005\00c\005\00d\005\00e\005\00f\006\000\006\001\006\002\006\003\006\004\006\005\006\006\006\007\006\008\006\009\006\00a\006\00b\006\00c\006\00d\006\00e\006\00f\007\000\007\001\007\002\007\003\007\004\007\005\007\006\007\007\007\008\007\009\007\00a\007\00b\007\00c\007\00d\007\00e\007\00f\008\000\008\001\008\002\008\003\008\004\008\005\008\006\008\007\008\008\008\009\008\00a\008\00b\008\00c\008\00d\008\00e\008\00f\009\000\009\001\009\002\009\003\009\004\009\005\009\006\009\007\009\008\009\009\009\00a\009\00b\009\00c\009\00d\009\00e\009\00f\00a\000\00a\001\00a\002\00a\003\00a\004\00a\005\00a\006\00a\007\00a\008\00a\009\00a\00a\00a\00b\00a\00c\00a\00d\00a\00e\00a\00f\00b\000\00b\001\00b\002\00b\003\00b\004\00b\005\00b\006\00b\007\00b\008\00b\009\00b\00a\00b\00b\00b\00c\00b\00d\00b\00e\00b\00f\00c\000\00c\001\00c\002\00c\003\00c\004\00c\005\00c\006\00c\007\00c\008\00c\009\00c\00a\00c\00b\00c\00c\00c\00d\00c\00e\00c\00f\00d\000\00d\001\00d\002\00d\003\00d\004\00d\005\00d\006\00d\007\00d\008\00d\009\00d\00a\00d\00b\00d\00c\00d\00d\00d\00e\00d\00f\00e\000\00e\001\00e\002\00e\003\00e\004\00e\005\00e\006\00e\007\00e\008\00e\009\00e\00a\00e\00b\00e\00c\00e\00d\00e\00e\00e\00f\00f\000\00f\001\00f\002\00f\003\00f\004\00f\005\00f\006\00f\007\00f\008\00f\009\00f\00a\00f\00b\00f\00c\00f\00d\00f\00e\00f\00f\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 3404) "\\\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00H\00\00\000\001\002\003\004\005\006\007\008\009\00a\00b\00c\00d\00e\00f\00g\00h\00i\00j\00k\00l\00m\00n\00o\00p\00q\00r\00s\00t\00u\00v\00w\00x\00y\00z\00\00\00\00\00")
+ (data (i32.const 3500) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\0e\00\00\00p\00u\00b\00l\00i\00s\00h\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 3548) "L\00\00\00\00\00\00\00\00\00\00\00\01\00\00\006\00\00\00s\00e\00r\00v\00i\00c\00e\00,\00a\00d\00a\00p\00t\00e\00r\00,\00p\00o\00r\00t\00E\00x\00,\00t\00y\00p\00e\00\00\00\00\00\00\00")
+ (data (i32.const 3628) "\1c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\08\00\00\00\c0\0d\00\00\f0\0d\00\00\00\00\00\00")
+ (data (i32.const 3660) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00 \00\00\00c\00o\00m\00m\00a\00n\00d\00E\00x\00 \00c\00a\00l\00l\00e\00d\00\00\00\00\00\00\00\00\00\00\00\00\00")
+ (data (i32.const 3724) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
+ (data (i32.const 3788) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
+ (data (i32.const 3856) "\07\00\00\00 \00\00\00\00\00\00\00 \00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02A\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02A\00\00\00\00\00\00\02\t\00\00\00\00\00\00")
  (table $0 1 funcref)
  (elem $0 (i32.const 1))
  (export "ModelSpec" (global $assembly/index/ModelSpec))
@@ -99,9 +109,11 @@
  (export "ModelSpec#constructor" (func $export:assembly/index/ModelSpec#constructor))
  (export "modelFactory" (func $export:assembly/index/modelFactory))
  (export "test" (func $export:assembly/index/test))
- (export "commandEx" (func $export:assembly/index/commandEx))
+ (export "webSocketListen" (func $export:assembly/index/webSocketListen))
+ (export "webSocketRecieve" (func $export:assembly/index/webSocketRecieve))
  (export "fibonacci" (func $export:assembly/index/fibonacci))
  (export "getPorts" (func $export:assembly/index/getPorts))
+ (export "commandEx" (func $export:assembly/index/commandEx))
  (export "portEx" (func $export:assembly/index/portEx))
  (export "onUpdate" (func $export:assembly/index/onUpdate))
  (export "onDelete" (func $export:assembly/index/onDelete))
@@ -4161,6 +4173,9 @@
   local.get $2
   call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__uset
  )
+ (func $assembly/index/webSocketRecieve (param $0 i32) (param $1 i32)
+  nop
+ )
  (func $assembly/index/calcFibonacci (param $0 f64) (result f64)
   local.get $0
   f64.const 0
@@ -4276,14 +4291,14 @@
     i32.const 100
     i32.rem_u
     local.set $7
-    i32.const 1612
+    i32.const 1948
     local.get $6
     i32.const 2
     i32.shl
     i32.add
     i64.load32_u
     local.set $8
-    i32.const 1612
+    i32.const 1948
     local.get $7
     i32.const 2
     i32.shl
@@ -4326,7 +4341,7 @@
    i32.const 2
    i32.sub
    local.set $2
-   i32.const 1612
+   i32.const 1948
    local.get $10
    i32.const 2
    i32.shl
@@ -4349,7 +4364,7 @@
    i32.const 2
    i32.sub
    local.set $2
-   i32.const 1612
+   i32.const 1948
    local.get $1
    i32.const 2
    i32.shl
@@ -4496,14 +4511,14 @@
     i32.const 100
     i32.rem_u
     local.set $11
-    i32.const 1612
+    i32.const 1948
     local.get $10
     i32.const 2
     i32.shl
     i32.add
     i64.load32_u
     local.set $12
-    i32.const 1612
+    i32.const 1948
     local.get $11
     i32.const 2
     i32.shl
@@ -4525,14 +4540,14 @@
     i64.shl
     i64.or
     i64.store
-    i32.const 1612
+    i32.const 1948
     local.get $8
     i32.const 2
     i32.shl
     i32.add
     i64.load32_u
     local.set $12
-    i32.const 1612
+    i32.const 1948
     local.get $9
     i32.const 2
     i32.shl
@@ -4581,7 +4596,7 @@
     i32.const 1
     i32.shl
     i32.add
-    i32.const 2032
+    i32.const 2368
     local.get $1
     i32.wrap_i64
     i32.const 255
@@ -4603,7 +4618,7 @@
   i32.and
   if
    local.get $0
-   i32.const 2032
+   i32.const 2368
    local.get $1
    i32.wrap_i64
    i32.const 6
@@ -4726,7 +4741,7 @@
     i32.const 1
     i32.shl
     i32.add
-    i32.const 3088
+    i32.const 3424
     local.get $1
     local.get $6
     i64.and
@@ -4762,7 +4777,7 @@
     i32.const 1
     i32.shl
     i32.add
-    i32.const 3088
+    i32.const 3424
     local.get $1
     local.get $6
     local.get $4
@@ -4791,7 +4806,7 @@
   call $~lib/util/number/itoa64
  )
  (func $assembly/index/portEx (param $0 i32) (param $1 i32)
-  nop
+  return
  )
  (func $assembly/index/onUpdate (param $0 i32) (param $1 i32)
   return
@@ -4812,7 +4827,7 @@
    i32.const 3
    i32.eq
    if
-    i32.const 3344
+    i32.const 3744
     i32.const 32
     i32.const 337
     i32.const 7
@@ -4844,7 +4859,7 @@
   i32.const 3
   i32.ne
   if
-   i32.const 3408
+   i32.const 3808
    i32.const 32
    i32.const 351
    i32.const 5
@@ -4930,16 +4945,16 @@
   i32.const 240
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 3344
+  i32.const 3744
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 3408
+  i32.const 3808
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 2032
+  i32.const 2368
   local.get $0
   call $~lib/rt/itcms/__visit
-  i32.const 3088
+  i32.const 3424
   local.get $0
   call $~lib/rt/itcms/__visit
  )
@@ -5156,8 +5171,8 @@
   global.get $~lib/memory/__data_end
   i32.lt_s
   if
-   i32.const 19920
-   i32.const 19968
+   i32.const 20320
+   i32.const 20368
    i32.const 1
    i32.const 1
    call $~lib/builtins/abort
@@ -5541,7 +5556,7 @@
   i32.const 2
   i32.const 2
   i32.const 3
-  i32.const 1072
+  i32.const 1056
   call $~lib/rt/__newArray
   local.set $3
   global.get $~lib/memory/__stack_pointer
@@ -5554,7 +5569,59 @@
   i32.const 2
   i32.const 2
   i32.const 3
-  i32.const 1216
+  i32.const 1152
+  call $~lib/rt/__newArray
+  local.set $3
+  global.get $~lib/memory/__stack_pointer
+  local.get $3
+  i32.store offset=4
+  local.get $3
+  call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__set
+  local.get $0
+  i32.const 2
+  i32.const 2
+  i32.const 2
+  i32.const 3
+  i32.const 1232
+  call $~lib/rt/__newArray
+  local.set $3
+  global.get $~lib/memory/__stack_pointer
+  local.get $3
+  i32.store offset=4
+  local.get $3
+  call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__set
+  local.get $0
+  i32.const 3
+  i32.const 2
+  i32.const 2
+  i32.const 3
+  i32.const 1312
+  call $~lib/rt/__newArray
+  local.set $3
+  global.get $~lib/memory/__stack_pointer
+  local.get $3
+  i32.store offset=4
+  local.get $3
+  call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__set
+  local.get $0
+  i32.const 4
+  i32.const 2
+  i32.const 2
+  i32.const 3
+  i32.const 1392
+  call $~lib/rt/__newArray
+  local.set $3
+  global.get $~lib/memory/__stack_pointer
+  local.get $3
+  i32.store offset=4
+  local.get $3
+  call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__set
+  local.get $0
+  i32.const 5
+  i32.const 1
+  i32.const 2
+  i32.const 3
+  i32.const 1472
   call $~lib/rt/__newArray
   local.set $3
   global.get $~lib/memory/__stack_pointer
@@ -5570,19 +5637,22 @@
   global.set $~lib/memory/__stack_pointer
   local.get $3
  )
- (func $assembly/index/commandEx (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/index/webSocketListen (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
   global.get $~lib/memory/__stack_pointer
-  i32.const 8
+  i32.const 12
   i32.sub
   global.set $~lib/memory/__stack_pointer
   call $~stack_check
   global.get $~lib/memory/__stack_pointer
   i64.const 0
   i64.store
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store offset=8
   global.get $~lib/memory/__stack_pointer
   i32.const 0
   i32.const 1
@@ -5594,7 +5664,7 @@
   i32.const 2
   i32.const 2
   i32.const 3
-  i32.const 1328
+  i32.const 1584
   call $~lib/rt/__newArray
   local.set $5
   global.get $~lib/memory/__stack_pointer
@@ -5602,10 +5672,17 @@
   i32.store offset=4
   local.get $5
   call $~lib/array/Array<~lib/array/Array<~lib/string/String>>#__set
+  i32.const 1616
+  local.set $5
+  global.get $~lib/memory/__stack_pointer
+  local.get $5
+  i32.store offset=8
+  local.get $5
+  call $assembly/aegis/log
   local.get $2
   local.set $5
   global.get $~lib/memory/__stack_pointer
-  i32.const 8
+  i32.const 12
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $5
@@ -5631,7 +5708,7 @@
   call $~lib/bindings/Date/now
   i64.trunc_f64_s
   local.set $2
-  f64.const 100
+  f64.const 10
   call $assembly/index/calcFibonacci
   drop
   call $~lib/bindings/Date/now
@@ -5662,7 +5739,7 @@
   i32.store offset=12
   local.get $5
   i32.const 0
-  i32.const 1360
+  i32.const 1696
   call $~lib/array/Array<~lib/string/String>#__uset
   local.get $5
   i32.const 1
@@ -5709,7 +5786,7 @@
   i32.const 2
   i32.const 2
   i32.const 3
-  i32.const 3312
+  i32.const 3648
   call $~lib/rt/__newArray
   local.set $5
   global.get $~lib/memory/__stack_pointer
@@ -5724,6 +5801,29 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $5
+ )
+ (func $assembly/index/commandEx (param $0 i32) (param $1 i32)
+  (local $2 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  i32.const 0
+  i32.store
+  i32.const 3680
+  local.set $2
+  global.get $~lib/memory/__stack_pointer
+  local.get $2
+  i32.store
+  local.get $2
+  call $assembly/aegis/log
+  global.get $~lib/memory/__stack_pointer
+  i32.const 4
+  i32.add
+  global.set $~lib/memory/__stack_pointer
+  return
  )
  (func $assembly/index/ModelSpec#constructor (param $0 i32) (param $1 i32) (param $2 i32) (result i32)
   (local $3 i32)
@@ -5992,8 +6092,8 @@
    i32.gt_s
   end
   if
-   i32.const 1408
-   i32.const 1536
+   i32.const 1744
+   i32.const 1872
    i32.const 431
    i32.const 5
    call $~lib/builtins/abort
@@ -6004,7 +6104,7 @@
   i64.ne
   i32.eqz
   if
-   i32.const 1600
+   i32.const 1936
    local.set $10
    global.get $~lib/memory/__stack_pointer
    i32.const 4
@@ -6319,7 +6419,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $2
  )
- (func $export:assembly/index/commandEx (param $0 i32) (param $1 i32) (result i32)
+ (func $export:assembly/index/webSocketListen (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
@@ -6334,13 +6434,33 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/commandEx
+  call $assembly/index/webSocketListen
   local.set $2
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $2
+ )
+ (func $export:assembly/index/webSocketRecieve (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/index/webSocketRecieve
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
  )
  (func $export:assembly/index/fibonacci (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
@@ -6387,6 +6507,26 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $2
+ )
+ (func $export:assembly/index/commandEx (param $0 i32) (param $1 i32)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  call $~stack_check
+  global.get $~lib/memory/__stack_pointer
+  local.get $0
+  i32.store
+  global.get $~lib/memory/__stack_pointer
+  local.get $1
+  i32.store offset=4
+  local.get $0
+  local.get $1
+  call $assembly/index/commandEx
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.add
+  global.set $~lib/memory/__stack_pointer
  )
  (func $export:assembly/index/portEx (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer

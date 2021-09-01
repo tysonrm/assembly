@@ -1,4 +1,5 @@
 const assert = require('assert')
+const { allowedNodeEnvironmentFlags } = require('process')
 const interop = require('../wasm-interop')
 const wrapper = require('../wasm-wrappers')
 
@@ -13,9 +14,20 @@ require('..').then(wasmModule => {
     ArrayOfStrings_ID,
     ModelSpec,
     getModelSpec,
-    modelFactory,
-    modelName
+    modelFactory
+    // Input,
+    // Output,
+    // getInput,
+    // getOutput,
+    // testClass
   } = wasmModule.exports
+
+  // const inPtr = __pin(getInput())
+  // const InClass = Input.wrap(inPtr)
+  // const input = new Input('data1', 'data1')
+
+  // const outPtr = __pin(testClass(input))
+  // const output = Output.wrap(outPtr)
 
   adapter = interop.WasmInterop(wasmModule)
 
