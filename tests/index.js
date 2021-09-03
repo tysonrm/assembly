@@ -13,7 +13,9 @@ require('..').then(wasmInstance => {
     ArrayOfStrings_ID,
     ModelSpec,
     getModelSpec,
-    modelFactory
+    modelFactory,
+    fibonacci,
+    onUpdate
     // Input,
     // Output,
     // getInput,
@@ -21,31 +23,25 @@ require('..').then(wasmInstance => {
     // testClass
   } = wasmInstance.exports
 
-  // const inPtr = __pin(getInput())
-  // const InClass = Input.wrap(inPtr)
-  // const input = new Input('data1', 'data1')
-
-  // const outPtr = __pin(testClass(input))
-  // const output = Output.wrap(outPtr)
+  console.log(Object.entries(wasmInstance.exports))
 
   const adapter = WasmInterop(wasmInstance)
 
   const wms = wrapper.wrapWasmModelSpec(wasmInstance)
   console.log(wms)
-  console.log(wms.test({ key1: 'val1', a: 'b' }))
+  console.log(wms.test({}))
 
-  assert.equal(
-    adapter.callWasmFunction(wasmInstance.exports.commandEx, { a: 'b' }),
-    { a: 'b' }
+  const fib = 20
+  console.log(
+    'fibonacci of',
+    fib,
+    'is',
+    adapter.callWasmFunction(fibonacci, fib)
   )
 
-  adapter.callWasmFunction(wasmInstance.exports.fibonacci, { a: 'b', c: 'd' })
-
-  //console.log(Object.entries(wasmModule.exports))
   const specPtr = __pin(getModelSpec())
   const modelSpec = ModelSpec.wrap(specPtr)
-  console.log(__getString(modelSpec.modelName))
-  console.log(__getString(modelSpec.endpoint))
+
   const wrapped = {
     modelMame: __getString(modelSpec.modelName),
     endpoint: __getString(modelSpec.endpoint),
@@ -58,10 +54,6 @@ require('..').then(wasmInstance => {
       // Provide our array of lowercase strings to WebAssembly, and obtain the new
       // array of uppercase strings before printing it.
       const modelPtr = __pin(modelFactory(keyPtr, valPtr))
-
-      // The array keeps its values alive from now on
-      //const model = Model.wrap(modelPtr);
-
       const model = __getArray(modelPtr)
         .map(multi => __getArray(multi))
         .map(tuple => ({
@@ -71,29 +63,32 @@ require('..').then(wasmInstance => {
           ...prop1,
           ...prop2
         }))
-
-      // const array = __getArray(modelPtr);
-      // const decoded = array.map(a => __getArray(a)).map(b => ({ [__getString(b[0])]: __getString(b[1]) })).reduce((p, c) => ({ ...p, ...c }))
-
-      console.log(model)
-
-      // const hydrated = Object.entries(([k, v]) => ({ [__getString(k)]: __getString(v) }));
-      // const hyd2 = Object.keys(model).map(k => __getString(model[k]));
-      // console.log("<<<<<<<", hyd2)
-      // console.log(">>>>>>>>>", hydrated)
+        console.log(model)
       keyPtrs.forEach(__unpin)
       valPtrs.forEach(__unpin)
-      //model.cleanup = () => __unpin(modelPtr)
     }
   }
-  console.log(wrapped.endpoint)
-  console.log(wrapped.modelMame)
-  console.log(wrapped.factory({ key1: 'fromInput1', key2: 'fromInput2' }))
+
+  const model = wrapped.factory({ key1: 'fromInput1', key2: 'fromInput2' })
+  console.log(model)
+  adapter.callWasmFunction(onUpdate, model, false)
 
   assert.strictEqual(wrapped.modelMame, 'wasm')
   assert.strictEqual(wrapped.endpoint, 'wasm')
 
   __unpin(specPtr)
+
+  // assert.equal(
+  //   adapter.callWasmFunction(wasmInstance.exports.commandEx, { a: 'b' }),
+  //   { a: 'b' }
+  // )
+
+  // const inPtr = __pin(getInput())
+  // const InClass = Input.wrap(inPtr)
+  // const input = new Input('data1', 'data1')
+
+  // const outPtr = __pin(testClass(input))
+  // const output = Output.wrap(outPtr)
 
   return Object.freeze(wrapped)
 })

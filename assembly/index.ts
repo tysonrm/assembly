@@ -62,7 +62,7 @@ export function websocketCallback(keys:string[],values:string[]):void{
   aegis.log("websocket callbacked fired");
 }
 
-export function calcFibonacci(x:f64):f64 {
+export function fibonacci(x:f64):f64 {
   if (x === 0) {
     return 0
   }
@@ -71,22 +71,18 @@ export function calcFibonacci(x:f64):f64 {
     return 1
   }
 
-  return calcFibonacci(x - 1) + calcFibonacci(x - 2)
+  return fibonacci(x - 1) + fibonacci(x - 2)
 }
 
-export function fibonacci(keys:string[],vals:string[]):string[][] {
-  //const x = parseFloat(values[keys.findIndex(k => k === "fibonacci")])
-  aegis.websocketNotify('fibonacci', 'starting '+new Date(Date.now()).toUTCString());
-  const start = Date.now()
-  calcFibonacci(10)
-  const duration = Date.now() - start
-  const output = new Array<string[]>(1);
-  output[0] = ["duration", duration.toString()];
-  // aegis.invokeMethod('notify', 'fibonacci duration '+duration.toString());
-  // aegis.websocketNotify('fibonacci', output[0].join(":").toString());
-  aegis.log("fibanocci "+output[0].join(":").toString())
-  return output;
-}
+// export function fibonnacciRemote(keys:string[], vals:string[]):string[][]{
+//   const x = vals.map((v,i) => keys[i] === 'fibonacci' ? v : null)
+//   const r = new Array<string[]>(1);
+//   if (x.length < 1 || !x[0] || typeof x[0] !== 'number') return r
+//   const z = parseFloat(x[0])
+//   r[0] = ["duration",fibonacci(z).toString()]
+//   return r
+// }
+
 
 export function getPorts (keys:string[],vals:string[]):string[][] {
   const ports = new Array<string[]>(1);
@@ -102,10 +98,12 @@ export function commandEx (keys:string[],vals:string[]):string[][] {
 }
 
 export function portEx (keys:string[],vals:string[]):void {
+  aegis.invokePort("port","data")
   return
 }
 
 export function onUpdate (keys:string[], vals:string[]):void{
+  aegis.log('onUpdate called')
   return 
 }
 

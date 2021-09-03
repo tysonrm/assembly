@@ -5,8 +5,6 @@
 
 exports.WasmInterop = function (module) {
   const {
-    modelName,
-    endpoint,
     getCommands,
     getPorts,
     ArrayOfStrings_ID,
@@ -36,10 +34,15 @@ exports.WasmInterop = function (module) {
 
   function callExport ({
     fn: wasmFn,
-    keys: keyPtrs,
-    vals: valPtrs,
-    retval = true
+    keys: keyPtrs = [],
+    vals: valPtrs = [],
+    retval = true,
+    num = null
   }) {
+    if (typeof num === 'number') {
+      return wasmFn(num)
+    }
+
     if (keyPtrs.length > 0) {
       const keyArrayPtr = __pin(__newArray(ArrayOfStrings_ID, keyPtrs))
       const valArrayPtr = __pin(__newArray(ArrayOfStrings_ID, valPtrs))
@@ -70,13 +73,11 @@ exports.WasmInterop = function (module) {
     return immutableClone
   }
 
-  return {
-    cleanup ({ keys, vals, obj }) {
-      if (keys) __unpin(vals)
-      if (vals) __unpin(keys)
-      if (obj) __unpin(obj)
-    },
+  function cleanup (obj) {
+    if (obj) __unpin(obj)
+  }
 
+  return {
     /**
      * For any function that accepts and returns an object,
      * we instead pass and return two string arrays, one array
@@ -88,10 +89,11 @@ exports.WasmInterop = function (module) {
      * @returns {object} see above
      */
     callWasmFunction (fn, args = {}, retval = true) {
+      if (typeof args === 'number') return callExport({ fn, num: args })
       const { keys, vals } = parseArguments(args)
       const obj = callExport({ fn, keys, vals })
       if (retval) return returnObject(obj)
-      cleanup({ keys, vals, obj })
+      cleanup(obj)
     },
 
     getWasmCommands () {
@@ -110,7 +112,6 @@ exports.WasmInterop = function (module) {
                 command: input => this.callWasmFunction(cmd, input),
                 acl: ['write']
               },
-              description: commandNames[command] || 'wasm command'
             }
           }
         })
@@ -136,20 +137,5 @@ exports.WasmInterop = function (module) {
         })
         .reduce((p, c) => ({ ...p, ...c }))
     },
-
-    getModelName () {
-      return __getString(modelName)
-    },
-
-    getEndpoint () {
-      return __getString(endpoint)
-    },
-
-    /**
-     * in case we need to call something later on that alloc's mem
-     */
-    dispose () {
-      //
-    }
   }
 }

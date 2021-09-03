@@ -5,3 +5,4 @@ export declare function websocketListen(eventName:string, callbackName:string):v
 export declare function websocketNotify(eventName:string, eventData:string):void
 export declare function invokeMethod(methodName:string, methodArgs:string):void
 export declare function invokePort(portName:string, portData:string, fieldNames?:string[]):void
+export declare function getId():string
