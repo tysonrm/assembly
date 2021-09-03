@@ -133,7 +133,7 @@ async function importWebAssembly () {
       return wasm.then(inst =>
         fn(...ptrArray.map(p => inst.exports.__getString(p)))
       )
-    } else if (wasm.exports) {
+    } else if (wasm?.exports && wasm.exports.__getString) {
       return fn(...ptr.map(p => wasm.exports.__getString(p)))
     } else {
       console.log('no ref to module')

@@ -74,14 +74,14 @@ export function fibonacci(x:f64):f64 {
   return fibonacci(x - 1) + fibonacci(x - 2)
 }
 
-// export function fibonnacciRemote(keys:string[], vals:string[]):string[][]{
-//   const x = vals.map((v,i) => keys[i] === 'fibonacci' ? v : null)
-//   const r = new Array<string[]>(1);
-//   if (x.length < 1 || !x[0] || typeof x[0] !== 'number') return r
-//   const z = parseFloat(x[0])
-//   r[0] = ["duration",fibonacci(z).toString()]
-//   return r
-// }
+export function fibonnacciRemote(keys:string[], vals:string[]):string[][]{
+  // const x = vals.map((v,i) => keys[i] === 'fibonacci' ? v : null)
+   const r = new Array<string[]>(1);
+  //if (x.length < 1 || !x[0] || typeof x[0] !== 'number') return r
+  //const z = parseFloat(x[0])
+  r[0] = ["duration",fibonacci(10).toString()]
+  return r
+}
 
 
 export function getPorts (keys:string[],vals:string[]):string[][] {
@@ -98,7 +98,8 @@ export function commandEx (keys:string[],vals:string[]):string[][] {
 }
 
 export function portEx (keys:string[],vals:string[]):void {
-  aegis.invokePort("port","data")
+  aegis.log("portEx calling port wasmTestPort")
+  //aegis.invokePort("wasmTestPort","lorem ipsum","wasmTestEvent")
   return
 }
 
