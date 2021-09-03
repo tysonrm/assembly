@@ -18,8 +18,6 @@ exports.wrapWasmModelSpec = function (module) {
   const {
     test,
     modelFactory,
-    // modelName,
-    // endpoint,
     __getString,
     __pin,
     getModelSpec,
@@ -42,20 +40,19 @@ exports.wrapWasmModelSpec = function (module) {
     factory: dependencies => async input =>
       adapter.callWasmFunction(modelFactory, { ...dependencies, ...input }),
 
-    // onUpdate: (_model, changes) =>
-    //   callWasmFunction(module.exports.onUpdate, changes),
+    onUpdate: (model, changes) =>
+      callWasmFunction(wam.exports.onUpdate, changes),
 
-    // onDelete: (_model) => adapter.callWasmFunction(
-    //   module.exports.onDelete, null, false
-    // ),
+    onDelete: model =>
+      adapter.callWasmFunction(module.exports.onDelete, model, false),
 
     commands: {
       ...adapter.getWasmCommands()
-    }
+    },
 
-    // ports: {
-    //   ...adapter.getWasmPorts(),
-    // },
+    ports: {
+      ...adapter.getWasmPorts()
+    }
 
     // call to dispose of spec memory
     // dispose: () => adapter.dispose(),
