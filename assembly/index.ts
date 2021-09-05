@@ -42,9 +42,9 @@ export function getCommands():string[][] {
   commands[0] = ["websocketListen","tell wasm module to begin listening"];
   commands[1] = ["websocketNotify","tell wasm module to send broadcast"];
   commands[2] = ["websocketCallback","an event to which wasm subscribed has fired"]
-  commands[3] = ["fibonacci","write"]
-  commands[4] = ["deployModule","write"]
-  commands[5] = ["commandEx", "write"]
+  commands[3] = ["fibonacci","calculate fibonacci for a number"]
+  commands[4] = ["deployModule","request deployment of a module"]
+  commands[5] = ["commandEx", "command example"]
   return commands;
 }
 
@@ -54,8 +54,8 @@ export function websocketListen(keys:string[],values:string[]):void{
 }
 
 export function websocketNotify(keys:string[],values:string[]):void{
-  //aegis.webSocketNotify("wasmWebNotify",values[0].toString());
   aegis.log("wasm invoked websocket notify");
+  aegis.websocketNotify("wasmWebNotify",values[0].toString());
 }
 
 export function websocketCallback(keys:string[],values:string[]):void{
@@ -109,6 +109,11 @@ export function onUpdate (keys:string[], vals:string[]):void{
 }
 
 export function onDelete (keys:string[], vals:string):void {
+  return 
+}
+
+export function validate(keys:string[], vals:string[]):void{
+  aegis.log('onUpdate called')
   return 
 }
 

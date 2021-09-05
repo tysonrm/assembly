@@ -107,6 +107,7 @@ async function importWebAssembly () {
 
         websocketListen: (eventName, callbackName) => {
           console.debug('websocket listen invoked')
+
           if (wasm.then) {
             observer.listen(eventName, eventData => {
               const cmd = adapter.findWasmCommand(getString(callbackName))

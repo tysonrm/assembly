@@ -46,6 +46,9 @@ exports.wrapWasmModelSpec = function (module) {
     onDelete: model =>
       adapter.callWasmFunction(module.exports.onDelete, model, false),
 
+    validate: model =>
+      adapter.callWasmFunction(module.exports.validate, model, false),
+
     commands: {
       ...adapter.getWasmCommands()
     },
