@@ -39,12 +39,12 @@ export function test (keys: string[], values: string[]): string[][] {
   
 export function getCommands():string[][] {
   const commands = new Array<string[]>(6);
-  commands[0] = ["websocketListen","tell wasm module to begin listening"];
-  commands[1] = ["websocketNotify","tell wasm module to send broadcast"];
-  commands[2] = ["websocketCallback","an event to which wasm subscribed has fired"]
-  commands[3] = ["fibonacci","calculate fibonacci for a number"]
-  commands[4] = ["deployModule","request deployment of a module"]
-  commands[5] = ["commandEx", "command example"]
+  commands[0] = ["websocketListen2","tell wasm module to begin listening"];
+  commands[1] = ["websocketNotify2","tell wasm module to send broadcast"];
+  commands[2] = ["websocketCallback2","an event to which wasm subscribed has fired"]
+  commands[3] = ["fibonacci2","calculate fibonacci for a number"]
+  commands[4] = ["deployModule2","request deployment of a module"]
+  commands[5] = ["commandEx2", "command example"]
   return commands;
 }
 
@@ -55,7 +55,7 @@ export function websocketListen(keys:string[],values:string[]):void{
 
 export function websocketNotify(keys:string[],values:string[]):void{
   aegis.log("wasm invoked websocket notify");
-  aegis.websocketNotify("wasmWebNotify",values[0].toString());
+  aegis.websocketNotify("wasmWebNotify22",values[0].toString());
 }
 
 export function websocketCallback(keys:string[],values:string[]):void{
@@ -74,7 +74,7 @@ export function fibonacci(x:f64):f64 {
   return fibonacci(x - 1) + fibonacci(x - 2)
 }
 
-export function fibonnacciRemote(keys:string[], vals:string[]):string[][]{
+export function fibonnacciRemote2(keys:string[], vals:string[]):string[][]{
   // const x = vals.map((v,i) => keys[i] === 'fibonacci' ? v : null)
    const r = new Array<string[]>(1);
   //if (x.length < 1 || !x[0] || typeof x[0] !== 'number') return r
@@ -83,20 +83,19 @@ export function fibonnacciRemote(keys:string[], vals:string[]):string[][]{
   return r
 }
 
-
 export function getPorts (keys:string[],vals:string[]):string[][] {
   const ports = new Array<string[]>(1);
   ports[0] = ["publish","service,adapter,portEx,type"];
   return ports;
-}
-
-export function commandEx (keys:string[],vals:string[]):string[][] {
-  aegis.log("\ncommandEx called")
-  let outval = new Array<string[]>(1)
-  outval = [['key'],['val']]
 } 
 
-export function portEx (keys:string[],vals:string[]):void {
+export function commandEx2 (keys:string[],vals:string[]):string[][] {
+  aegis.log("\ncommandEx called")
+  const outval = new Array<string[]>(1)
+  return [['key'],['val']];
+}
+
+export function portEx2 (keys:string[],vals:string[]):void {
   aegis.log("portEx calling port wasmTestPort")
   //aegis.invokePort("wasmTestPort","lorem ipsum","wasmTestEvent")
   return
