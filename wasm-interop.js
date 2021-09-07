@@ -53,11 +53,9 @@ exports.WasmInterop = function (module) {
 
       // Provide input as two arrays of strings, one for keys, other for values
       if (retval) return __pin(wasmFn(keyArrayPtr, valArrayPtr))
-    } else {
-      if (retval) return __pin(wasmFn())
     }
     // no return or input
-    return wasmFunc()
+    return __unpin(wasmFn())
   }
 
   function returnObject (ptr) {
@@ -111,7 +109,7 @@ exports.WasmInterop = function (module) {
               [command]: {
                 command: input => this.callWasmFunction(cmd, input),
                 acl: ['write']
-              },
+              }
             }
           }
         })
@@ -136,6 +134,6 @@ exports.WasmInterop = function (module) {
           }
         })
         .reduce((p, c) => ({ ...p, ...c }))
-    },
+    }
   }
 }
