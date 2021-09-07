@@ -92,10 +92,9 @@ export function getPorts (keys:string[],vals:string[]):string[][] {
 
 export function commandEx (keys:string[],vals:string[]):string[][] {
   aegis.log("\ncommandEx called")
-  const outval = new Array<string[]>(1)
-  outval[0]=[keys[0].toString(),vals[0].toString()];
-  return outval;
-}
+  let outval = new Array<string[]>(1)
+  outval = [['key'],['val']]
+} 
 
 export function portEx (keys:string[],vals:string[]):void {
   aegis.log("portEx calling port wasmTestPort")
