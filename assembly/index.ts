@@ -48,21 +48,21 @@ export function getCommands():string[][] {
   return commands;
 }
 
-export function websocketListen(keys:string[],values:string[]):void{
+export function websocketListen2(keys:string[],values:string[]):void{
   //aegis.webSocketListen("wasmWebListen", "webSocketCallback");
   aegis.log("wasm listening on websocket");
 }
 
-export function websocketNotify(keys:string[],values:string[]):void{
+export function websocketNotify2(keys:string[],values:string[]):void{
   aegis.log("wasm invoked websocket notify");
-  aegis.websocketNotify("wasmWebNotify22",values[0].toString());
+  aegis.websocketNotify("wasmWebNotify2",values[0].toString());
 }
 
-export function websocketCallback(keys:string[],values:string[]):void{
+export function websocketCallback2(keys:string[],values:string[]):void{
   aegis.log("websocket callbacked fired");
 }
 
-export function fibonacci(x:f64):f64 {
+export function fibonacci2(x:f64):f64 {
   if (x === 0) {
     return 0
   }
@@ -71,7 +71,7 @@ export function fibonacci(x:f64):f64 {
     return 1
   }
 
-  return fibonacci(x - 1) + fibonacci(x - 2)
+  return fibonacci2(x - 1) + fibonacci2(x - 2)
 }
 
 export function fibonnacciRemote2(keys:string[], vals:string[]):string[][]{
@@ -79,7 +79,7 @@ export function fibonnacciRemote2(keys:string[], vals:string[]):string[][]{
    const r = new Array<string[]>(1);
   //if (x.length < 1 || !x[0] || typeof x[0] !== 'number') return r
   //const z = parseFloat(x[0])
-  r[0] = ["duration",fibonacci(10).toString()]
+  r[0] = ["duration",fibonacci2(10).toString()]
   return r
 }
 
