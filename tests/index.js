@@ -1,6 +1,7 @@
 const assert = require('assert')
-const WasmInterop = require('../wasm-interop').WasmInterop
-const wrapper = require('../wasm-wrappers')
+const WasmInterop = require('../../aegis/src/adapters/webassembly/wasm-interop')
+  .WasmInterop
+const wrapper = require('../../aegis/src/adapters/webassembly/wasm-decorators')
 
 require('..').then(async wasmInstance => {
   const {
@@ -16,7 +17,9 @@ require('..').then(async wasmInstance => {
     modelFactory,
     fibonacci,
     onUpdate,
-    portEx
+    websocketNotify,
+    portEx,
+    fibonacciRemote
     // Input,
     // Output,
     // getInput,
@@ -31,10 +34,10 @@ require('..').then(async wasmInstance => {
   const spec = wrapper.wrapWasmModelSpec(wasmInstance)
 
   console.log(spec)
-  console.log(spec.test({}))
   const model = await spec.factory({ a: 'b' })({ c: 'd' })
   console.log(model)
   adapter.callWasmFunction(onUpdate, model, false)
+  adapter.callWasmFunction(websocketNotify, 'testing', false)
 
   const fib = 20
   console.log(
@@ -43,4 +46,5 @@ require('..').then(async wasmInstance => {
     'is',
     adapter.callWasmFunction(fibonacci, fib)
   )
+  console.log(adapter.callWasmFunction(fibonacciRemote, { fibonacci: 30.0 }))
 })
