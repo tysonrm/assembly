@@ -50,7 +50,7 @@
  (data (i32.const 1372) "<")
  (data (i32.const 1384) "\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00t\00l\00s\00f\00.\00t\00s")
  (data (i32.const 1436) "\1c")
- (data (i32.const 1448) "\01\00\00\00\08\00\00\00w\00a\00s\00m")
+ (data (i32.const 1448) "\01\00\00\00\n\00\00\00w\00a\00s\00m\002")
  (data (i32.const 1468) ",")
  (data (i32.const 1480) "\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s")
  (data (i32.const 1516) "|")
@@ -184,7 +184,7 @@
  (export "ModelSpec#constructor" (func $export:assembly/index/ModelSpec#constructor))
  (export "modelFactory" (func $export:assembly/index/modelFactory))
  (export "test" (func $export:assembly/index/test))
- (export "websocketListen" (func $export:assembly/index/websocketListen))
+ (export "websocketSubcribe" (func $export:assembly/index/websocketSubcribe))
  (export "websocketNotify" (func $export:assembly/index/websocketNotify))
  (export "websocketCallback" (func $export:assembly/index/websocketCallback))
  (export "fibonacciRemote" (func $export:assembly/index/fibonacciRemote))
@@ -6686,7 +6686,7 @@
   call $~lib/builtins/abort
   unreachable
  )
- (func $export:assembly/index/websocketListen (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/websocketSubcribe (param $0 i32) (param $1 i32)
   (local $2 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8

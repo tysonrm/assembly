@@ -10,7 +10,7 @@ export class ModelSpec {
 }
 
 export function getModelSpec (): ModelSpec {
-  return new ModelSpec('wasm', 'wasm')
+  return new ModelSpec('wasm2', 'wasm2')
 }
 
 export const ArrayOfStrings_ID = idof<string[]>()

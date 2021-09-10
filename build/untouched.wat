@@ -55,7 +55,7 @@
  (data (i32.const 288) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (data (i32.const 320) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (data (i32.const 348) "<\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1e\00\00\00~\00l\00i\00b\00/\00r\00t\00/\00t\00l\00s\00f\00.\00t\00s\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
- (data (i32.const 412) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\08\00\00\00w\00a\00s\00m\00\00\00\00\00")
+ (data (i32.const 412) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\n\00\00\00w\00a\00s\00m\002\00\00\00")
  (data (i32.const 444) ",\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\1a\00\00\00~\00l\00i\00b\00/\00a\00r\00r\00a\00y\00.\00t\00s\00\00\00")
  (data (i32.const 492) "|\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00^\00\00\00E\00l\00e\00m\00e\00n\00t\00 \00t\00y\00p\00e\00 \00m\00u\00s\00t\00 \00b\00e\00 \00n\00u\00l\00l\00a\00b\00l\00e\00 \00i\00f\00 \00a\00r\00r\00a\00y\00 \00i\00s\00 \00h\00o\00l\00e\00y\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00")
  (data (i32.const 620) "\1c\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\08\00\00\00k\00e\00y\001\00\00\00\00\00")
@@ -137,7 +137,7 @@
  (export "ModelSpec#constructor" (func $export:assembly/index/ModelSpec#constructor))
  (export "modelFactory" (func $export:assembly/index/modelFactory))
  (export "test" (func $export:assembly/index/test))
- (export "websocketListen" (func $export:assembly/index/websocketListen))
+ (export "websocketSubcribe" (func $export:assembly/index/websocketSubcribe))
  (export "websocketNotify" (func $export:assembly/index/websocketNotify))
  (export "websocketCallback" (func $export:assembly/index/websocketCallback))
  (export "fibonacciRemote" (func $export:assembly/index/fibonacciRemote))
@@ -7854,7 +7854,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $3
  )
- (func $assembly/index/websocketListen (param $0 i32) (param $1 i32)
+ (func $assembly/index/websocketSubcribe (param $0 i32) (param $1 i32)
   (local $2 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
@@ -8756,7 +8756,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $2
  )
- (func $export:assembly/index/websocketListen (param $0 i32) (param $1 i32)
+ (func $export:assembly/index/websocketSubcribe (param $0 i32) (param $1 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -8770,7 +8770,7 @@
   i32.store offset=4
   local.get $0
   local.get $1
-  call $assembly/index/websocketListen
+  call $assembly/index/websocketSubcribe
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.add
