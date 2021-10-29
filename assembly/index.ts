@@ -1,4 +1,9 @@
 import * as aegis from "./aegis";
+//import * as nn from "./neural-net";
+//import * as tst from "./test";
+
+const key: i32 = 0;
+const val: i32 = 1;
 
 export class ModelSpec {
   modelName: string;
@@ -10,64 +15,107 @@ export class ModelSpec {
 }
 
 export function getModelSpec(): ModelSpec {
-  return new ModelSpec("wasm", "wasm");
+  return new ModelSpec("wasm2", "wasm2");
 }
 
 export const ArrayOfStrings_ID = idof<string[]>();
 
+function findVal(key: string, keys: string[], vals: string[]): string {
+  for (let i: i32 = 0; i < keys.length; i++) {
+    if (keys[i] == key) {
+      return vals[i].toString();
+    }
+  }
+  return "";
+}
+
 export function modelFactory(keys: string[], values: string[]): string[][] {
-  const key1 = keys[0] == "key1" ? values[0] : "default";
-  const key2 = keys[1] == "key2" ? values[1] : "default";
   const arr = new Array<string[]>(3);
-  arr[0] = ["key1", key1];
-  arr[1] = ["key2", key2];
-  arr[2] = ["ssn", "123-456-7890"];
+  arr[0] = ["key1", findVal("key1", keys, values)];
+  arr[1] = ["key2", findVal("key2", keys, values)];
+  arr[2] = ["fibonacci", findVal("fibonacci", keys, values)];
   return arr;
 }
 
-export function test(keys: string[], values: string[]): string[][] {
-  const key1 = keys[0] == "key1" ? values[0] : "default";
-  const key2 = keys[1] == "key2" ? values[1] : "default";
-  const arr = new Array<string[]>(3);
-  arr[0] = ["key1", key1];
-  arr[1] = ["key2", key2];
-  arr[2] = ["key3", "alwaysThisValue"];
-  aegis.log("test called");
-  return arr;
+export function getPorts(keys: string[], vals: string[]): string[][] {
+  const ports = new Array<string[]>(2);
+  //service,type,consumesEvent,producesEvent,callback,undo
+  ports[0] = ["port3", "dFlow,outbound,port2_done,port3_done,port3Cb"];
+  ports[1] = ["port4", "dFlow,outbound,port3_done,port4_done,port4Cb"];
+  return ports;
 }
+
+export function port3Cb(keys: string[], vals: string[]): string[][] {
+  const cfg = [
+    ["port", "port3"],
+    ["callback", "port3Cb"],
+    ["consumesEvent", "port2_done"],
+    ["producesEvent", "port3_done"],
+  ];
+  aegis.log("porf invokced" + cfg[0][0]+" "+cfg[0][1]+" "+cfg[0][2]+cfg[0][3])
+  return cfg
+}
+
+export function port4Cb(keys: string[], vals: string[]): string[][] {
+  const cfg = [
+    ["port", "port4"],
+    ["callback", "port4Cb"],
+    ["consumesEvent", "port3_done"],
+    ["producesEvent", "port4_done"],
+  ];
+  aegis.log("porf invokced" + cfg[0][0]+" "+cfg[0][1]+" "+cfg[0][2]+cfg[0][3])
+  return cfg
+}
+
 
 export function getCommands(): string[][] {
   const commands = new Array<string[]>(7);
-  commands[0] = ["websocketListen", "tell wasm module to begin listening"];
-  commands[1] = ["websocketNotify", "tell wasm module to send broadcast"];
-  commands[2] = ["websocketCallback", "subscribed event fired"];
-  commands[3] = ["fibonacci", "calculate fibonacci for a number"];
-  commands[4] = ["fibonacciRemote", "calculate fibonacci for a number"];
+  commands[0] = ["serviceMeshListen", "tell wasm module to begin listening"];
+  commands[1] = ["serviceMeshNotify", "tell wasm module to send broadcast"];
+  commands[2] = ["serviceMeshCallback", "subscribed event fired"];
+  commands[3] = ["runFibonacci", "remote calculate fibonacci"];
+  commands[4] = ["fibonacci", "calculate fibonacci for a number"];
   commands[5] = ["deployModule", "request deployment of a module"];
   commands[6] = ["commandEx", "command example"];
   return commands;
 }
 
-export function websocketListen(keys: string[], values: string[]): void {
-  aegis.addListener("wasmWebListen", "websocketCallback");
-  aegis.log("wasm listening on websocket");
+export function commandEx(keys: string[], vals: string[]): string[][] {
+  aegis.log("\ncommandEx called " + keys[0] + ":" + vals[0]);
+  const retval = new Array<string[]>(1);
+  retval[0] = ["key1", "commandEx_update!"];
+  return retval;
 }
 
-export function websocketNotify(eventName: string, eventData: string): void {
-  aegis.log("wasm invoked websocket notify");
-  aegis.fireEvent("wasmWebNotify", "test");
+export function serviceMeshListen(keys: string[], vals: string[]): void {
+  aegis.log("serviceMeshListen: " + keys[0] + ": " + vals[0]);
+  const eventName = findVal("eventName", keys, vals);
+  aegis.addListener(eventName, "serviceMeshCallback");
 }
 
-export function websocketCallback(keys: string[], values: string[]): void {
-  aegis.log("websocket callbacked fired");
+export function serviceMeshNotify(keys: string[], vals: string[]): void {
+  const modelName = findVal("modelName", keys, vals);
+  const modelId = findVal("modelId", keys, vals);
+  const eventName = findVal("eventName", keys, vals);
+  const eventData = new Array<string[]>(3);
+  aegis.log("wasm notify called with args: " + modelName + ": " + modelId);
+  eventData[0] = [keys[0], vals[0]];
+  eventData[1] = ["modelName", modelName];
+  eventData[2] = ["modelId", modelId];
+  aegis.fireEvent(eventName || "wasmWebListen", eventData, 1);
 }
 
-export function inboundPort(keys: string[], vals: string[]): string[][] {
-  aegis.log("inbound port called");
-  const outval = new Array<string[]>(1);
-  outval[0] = ["key1", "val1"];
-  aegis.invokePort("task1", "task data", "task1Event", "", "");
-  return outval;
+export function serviceMeshCallback(
+  keys: string[],
+  vals: string[]
+): string[][] {
+  aegis.log("websocket callback fired: " + keys[0] + ": " + vals[0]);
+  const eventName = findVal("eventName", keys, vals);
+  const eventData = new Array<string[]>(2);
+  eventData[0] = [keys[0], vals[0]];
+  eventData[1] = [keys[1], vals[1]];
+  aegis.fireEvent(eventName, eventData, 1);
+  return [["key1", "serviceMeshCallback"]];
 }
 
 export function fibonacci(x: number): number {
@@ -82,51 +130,58 @@ export function fibonacci(x: number): number {
   return fibonacci(x - 1) + fibonacci(x - 2);
 }
 
-export function fibonacciRemote(keys: string[], vals: string[]): string[][] {
+export function runFibonacci(keys: string[], vals: string[]): string[][] {
   let val: number = 0;
+  let startTime: i64 = Date.now();
 
   for (let i = 0; i < keys.length; i++) {
-    if (keys[i] === "fibonacci") {
-      val = parseFloat(vals[i]);
+    if ("fibonacci" == keys[i]) {
+      val = parseInt(vals[i]);
+      break;
     }
   }
-  const ret = new Array<string[]>(1);
   const sum = fibonacci(val);
-  aegis.log("fib = " + sum.toString());
+  const ret = new Array<string[]>(2);
   ret[0] = ["result", sum.toString()];
+  ret[1] = ["time", (Date.now() - startTime).toString()];
   return ret;
 }
 
-export function getPorts(keys: string[], vals: string[]): string[][] {
-  const ports = new Array<string[]>(2);
-  ports[0] = ["notify", "Event,0,outbound"];
-  ports[1] = ["listen", "Event,0,outbound"];
-  return ports;
-}
-
-export function commandEx(keys: string[], vals: string[]): string[][] {
-  aegis.log("\ncommandEx called");
-  const outval = new Array<string[]>(1);
-  outval[0] = ["key1", "update1"];
-  return outval;
-}
-
 export function portEx(keys: string[], vals: string[]): void {
-  aegis.log("portEx calling port wasmTestPort");
-  //aegis.invokePort("wasmTestPort","lorem ipsum","wasmTestEvent")
+  aegis.log("portEx calling port wasmTestPort" + keys[0] + ":" + vals[0]);
   return;
 }
 
-export function onUpdate(keys: string[], vals: string[]): void {
-  aegis.log("onUpdate called");
-  return;
+export function onUpdate(keys: string[], vals: string[]): string[][] {
+  return [["updatedByWasm", new Date(Date.now()).toUTCString()]];
 }
 
-export function onDelete(keys: string[], vals: string): void {
-  return;
+export function onDelete(keys: string[], vals: string[]): i8 {
+  // return negative to stop the action
+  aegis.log("onDelete called");
+  return -1;
 }
 
 export function validate(keys: string[], vals: string[]): void {
   aegis.log("onUpdate called");
   return;
+}
+
+// export function inboundPort(keys: string[], vals: string[]): string[][] {
+//   aegis.log("inbound port called: " + keys[0] + ": " + vals[0]);
+//   const outval = new Array<string[]>(1);
+//   outval[0] = ["key1", "val1"];
+//   aegis.invokePort("task1", "task data", "task1Event", 1, 2);
+//   return outval;
+// }
+
+export function test(keys: string[], values: string[]): string[][] {
+  const key1 = keys[0] == "key1" ? values[0] : "default";
+  const key2 = keys[1] == "key2" ? values[1] : "default";
+  const arr = new Array<string[]>(3);
+  arr[0] = ["key1", key1];
+  arr[1] = ["key2", key2];
+  arr[2] = ["key3", "alwaysThisValue"];
+  aegis.log("test called");
+  return arr;
 }
